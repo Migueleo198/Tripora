@@ -5,7 +5,7 @@
 
         // array para almacenar los datos y poder cargar algunos en el constructor
         // inicializo con roles vacio (acceso libre) para evitar errores de no definido
-        protected $datos = ['rolesPermitidos' => []];
+        protected $datos = ['rolesPermitidos' => ["Admin"]];
 
         // cargar modelo
         public function modelo($modelo){
@@ -24,12 +24,15 @@
         }
 
 
-        // cargar vista api
-        public function vistaApi($datos){
+        // Devuelve los datos en json con el codigo http indicado
+        public function vistaApi($datos, $codigo = 200){
+            http_response_code($codigo);
             header('Access-Control-Allow-Origin: *');
             header('Content-Type: application/json');
             echo json_encode($datos);
             exit();
         }
+
+        
     }
 

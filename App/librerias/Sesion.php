@@ -3,7 +3,7 @@
     class Sesion{
 
         public static function crearSesion($usuarioSesion) {
-            $sessionTime = 365 * 24 * 60 * 60;                  // 1 año de duración
+            $sessionTime = TMP_SESION;                  // 1 año de duración
             session_set_cookie_params($sessionTime);
             session_start();
             session_regenerate_id();                            // Para crear un id de sesion distinto al antiguo
@@ -18,7 +18,7 @@
                 $datos['usuarioSesion'] = $_SESSION["usuarioSesion"];       // pasamos por referencia los datos de la sesion
             } else {
                 session_destroy();
-                redireccionar('/login/');
+                redireccionar('/login');
             }
         }
 
@@ -35,7 +35,7 @@
 
 
         public static function cerrarSesion() {        
-            session_start();                    // no seria necesaria esta linea, pero por asegurarnos en futuros usos
+            // session_start();                    // no seria necesaria esta linea, pero por asegurarnos en futuros usos
             setcookie(session_name(), '', time() -3600, "/");
             session_unset();
             session_destroy();

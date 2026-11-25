@@ -1,8 +1,14 @@
 <IfModule mod_rewrite.c>
     Options -Multiviews
     RewriteEngine On 
-    RewriteBase /mvc_completo/public/
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^(.+)$ index.php?url=$1 [QSA,L]
+</IfModule>
+
+# Obligar al navegador a comprobar si JS/CSS han cambiado (evita usar módulos viejos de la caché)
+<IfModule mod_headers.c>
+    <FilesMatch "\.(js|css)$">
+        Header set Cache-Control "no-cache"
+    </FilesMatch>
 </IfModule>

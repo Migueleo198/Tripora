@@ -40,7 +40,7 @@
             }
 
             // Obtenemos los parametros
-            $this->parametros = $url ? array_values($url) : [];
+            $this->parametros = $url ? array_values($url) : [];       //modificacion, para consistencia ['']
 
             //Llamamos al metodo del controlador
             call_user_func_array([$this->controladorActual,$this->metodoActual],$this->parametros);

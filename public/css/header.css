@@ -1,0 +1,521 @@
+
+/* ============================
+   TRIPORA — NAVBAR
+============================ */
+
+.tripora-navbar {
+    position: relative;
+    z-index: 1000;
+    background: rgba(48, 79, 165, 0.96);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    padding: 13px 0;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+}
+
+/* Brand */
+
+.tripora-navbar .navbar-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #f8f9ff;
+    font-weight: 750;
+    letter-spacing: -1px;
+    transition: color 0.2s ease;
+}
+
+.tripora-navbar .navbar-brand:hover {
+    color: #c5baff;
+}
+
+/* Logo (globo y avión de images/icons/TriporaIconWhite.png, sin el texto) */
+.tripora-logo {
+    display: block;
+    height: 40px;
+    width: auto;
+    filter: drop-shadow(0 0 8px rgba(139, 114, 255, 0.3));
+}
+
+/* Navigation links */
+
+.tripora-navbar .navbar-nav {
+    gap: 5px;
+}
+
+.tripora-navbar .nav-link {
+    position: relative;
+    display: flex;
+    align-items: center;
+    color: #aeb8ce;
+    font-size: 0.94rem;
+    font-weight: 500;
+    padding: 10px 14px !important;
+    border-radius: 9px;
+    transition:
+        color 0.2s ease,
+        background-color 0.2s ease;
+}
+
+.tripora-navbar .nav-link:hover,
+.tripora-navbar .nav-link.active,
+.tripora-navbar .nav-link[aria-expanded="true"] {
+    color: #ffffff;
+    background: rgba(139, 114, 255, 0.13);
+}
+
+.tripora-navbar .nav-link.active {
+    box-shadow: inset 0 -2px 0 #9a83ff;
+    border-radius: 9px 9px 5px 5px;
+}
+
+/* Search (barra de las páginas con listados: vistas/inc/buscador.php) */
+
+.tripora-search {
+    max-width: 520px;
+}
+
+.tripora-search .input-group-text {
+    background: #ffffff;
+    border-color: #dee2e6;
+    border-right: 0;
+    border-radius: 12px 0 0 12px;
+    color: #8590a7;
+}
+
+.tripora-search .form-control {
+    border-left: 0;
+    padding: 10px 12px 10px 0;
+    font-size: 0.95rem;
+}
+
+.tripora-search .form-control:focus {
+    border-color: #dee2e6;
+    box-shadow: none;
+}
+
+.tripora-search .input-group:focus-within {
+    border-radius: 12px;
+    box-shadow: 0 0 0 3px rgba(128, 101, 245, 0.18);
+}
+
+.tripora-search .btn-primary {
+    background: #0d6efd;
+    border-color: rgb(117, 112, 112);
+    border-radius: 0 12px 12px 0;
+    padding: 0 18px;
+    font-weight: 600;
+}
+
+.tripora-search .btn-primary:hover {
+    background: #957fff;
+    border-color: #957fff;
+}
+
+/* Account button — works with Bootstrap button classes */
+
+.tripora-navbar .btn-outline-light {
+    border-color: #343d52;
+    border-radius: 10px;
+    color: #e5e9f4;
+    padding: 9px 14px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.tripora-navbar .btn-outline-light:hover,
+.tripora-navbar .btn-outline-light[aria-expanded="true"] {
+    color: #ffffff;
+    background: rgba(139, 114, 255, 0.14);
+    border-color: #8065f5;
+}
+
+/* Dropdown menus */
+
+.tripora-navbar .dropdown-menu {
+    min-width: 210px;
+    margin-top: 10px;
+    padding: 7px;
+    background: rgba(48, 79, 165, 0.96);
+    border: 1px solid #303a50;
+    border-radius: 13px;
+    box-shadow: 0 14px 35px rgba(0, 0, 0, 0.3);
+    animation: tripora-dropdown-in 0.16s ease-out;
+}
+
+.tripora-navbar .dropdown-item {
+    color: #c6cee0;
+    padding: 10px 12px;
+    border-radius: 8px;
+    font-size: 0.91rem;
+    transition:
+        background-color 0.18s ease,
+        color 0.18s ease;
+}
+
+.tripora-navbar .dropdown-item:hover,
+.tripora-navbar .dropdown-item:focus {
+    background: rgba(139, 114, 255, 0.15);
+    color: #ffffff;
+}
+
+.tripora-navbar .dropdown-divider {
+    border-color: #303a50;
+}
+
+/* Mobile toggler */
+
+.tripora-navbar .navbar-toggler {
+    padding: 7px 10px;
+    border: 1px solid #354057;
+    border-radius: 10px;
+    box-shadow: none;
+}
+
+.tripora-navbar .navbar-toggler:focus {
+    box-shadow: 0 0 0 3px rgba(139, 114, 255, 0.18);
+}
+
+/* Dropdown entrance */
+
+@keyframes tripora-dropdown-in {
+    from {
+        opacity: 0;
+        transform: translateY(-4px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive layout */
+
+@media (max-width: 991.98px) {
+    .tripora-navbar {
+        padding: 11px 0;
+    }
+
+    .tripora-navbar .navbar-collapse {
+        padding-top: 12px;
+    }
+
+    .tripora-navbar .navbar-nav {
+        gap: 3px;
+        margin-top: 5px;
+    }
+
+    .tripora-navbar .nav-link {
+        padding: 11px 13px !important;
+    }
+
+    .tripora-navbar .nav-link.active {
+        box-shadow: inset 3px 0 0 #9a83ff;
+        border-radius: 8px;
+    }
+
+
+    .tripora-navbar .dropdown-menu {
+        margin-top: 4px;
+        box-shadow: none;
+    }
+
+    .tripora-navbar .dropdown.ms-lg-3 {
+        margin: 14px 0 4px;
+    }
+}
+
+/* Respect reduced-motion preferences */
+
+@media (prefers-reduced-motion: reduce) {
+    .tripora-navbar *,
+    .tripora-navbar *::before,
+    .tripora-navbar *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* ============================
+   TRIPORA — ESTILO GENERAL (como el mockup de Canva)
+   Este archivo se carga antes que Bootstrap, por eso los
+   selectores empiezan por "body": así pesan más y ganan.
+============================ */
+
+/* Fondo y texto de toda la página */
+
+body {
+    background: #f8f9ff;
+    color: #303a50;
+}
+
+body h1,
+body h2 {
+    color: #223045;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+body .lead {
+    color: #5f687b;
+}
+
+/* Botones: azul de la navbar y violeta al pasar el ratón
+   (Bootstrap 5.3 pinta los botones con estas variables) */
+
+body .btn {
+    border-radius: 10px;
+    font-weight: 600;
+}
+
+body .btn-primary {
+    --bs-btn-bg: #304fa5;
+    --bs-btn-border-color: #304fa5;
+    --bs-btn-hover-bg: #8065f5;
+    --bs-btn-hover-border-color: #8065f5;
+    --bs-btn-active-bg: #6e55e0;
+    --bs-btn-active-border-color: #6e55e0;
+    --bs-btn-disabled-bg: #304fa5;
+    --bs-btn-disabled-border-color: #304fa5;
+}
+
+body .btn-outline-primary {
+    --bs-btn-color: #304fa5;
+    --bs-btn-border-color: #304fa5;
+    --bs-btn-hover-bg: #304fa5;
+    --bs-btn-hover-border-color: #304fa5;
+}
+
+body .btn-link {
+    --bs-btn-color: #304fa5;
+    --bs-btn-hover-color: #8065f5;
+}
+
+/* Tarjetas de viajes y hoteles: esquinas redondas, sombra suave
+   y se elevan un poco al pasar el ratón */
+
+body .card {
+    border: 0;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 6px 20px rgba(48, 58, 80, 0.08) !important;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+body .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 14px 32px rgba(48, 58, 80, 0.14) !important;
+}
+
+body .card-title {
+    color: #223045;
+    font-weight: 700;
+}
+
+/* El precio de las tarjetas (párrafo en negrita) en violeta */
+body .card-text.fw-bold {
+    color: #6e66e9;
+    font-size: 1.15rem;
+}
+
+/* Botón "Ver más" a todo el ancho de la tarjeta */
+body .card-footer .btn {
+    width: 100%;
+}
+
+/* Buscador más grande y con sombra, como en el mockup */
+
+body .tripora-search {
+    max-width: 640px;
+}
+
+body .tripora-search .input-group {
+    border-radius: 12px;
+    box-shadow: 0 6px 18px rgba(48, 58, 80, 0.08);
+}
+
+body .tripora-search .form-control,
+body .tripora-search .input-group-text {
+    padding-top: 12px;
+    padding-bottom: 12px;
+}
+
+body .tripora-search .btn-primary {
+    background: #304fa5;
+    border-color: #304fa5;
+}
+
+/* Tablas del panel de administración */
+
+body .table {
+    --bs-table-bg: #ffffff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 6px 20px rgba(48, 58, 80, 0.06);
+}
+
+body .table thead th {
+    background: #eef1fb;
+    color: #5f687b;
+    font-weight: 600;
+    border-bottom: 0;
+}
+
+/* Formularios: campos redondeados con foco violeta */
+
+body .form-control,
+body .form-select {
+    border-radius: 10px;
+}
+
+body .form-control:focus,
+body .form-select:focus {
+    border-color: #957fff;
+    box-shadow: 0 0 0 3px rgba(128, 101, 245, 0.18);
+}
+
+/* Itinerario (acordeón del detalle del viaje) */
+
+body .accordion {
+    border-radius: 14px;
+    overflow: hidden;
+}
+
+body .accordion-button:not(.collapsed) {
+    background: #eef1fb;
+    color: #304fa5;
+}
+
+/* Avisos más suaves */
+
+body .alert {
+    border: 0;
+    border-radius: 12px;
+}
+
+/* ============================
+   TRIPORA — LOGIN (vistas/login.php, <body class="tripora-login">)
+   Fondo degradado azul-violeta y tarjeta blanca centrada.
+   El logo se pone con ::before para no tocar el HTML.
+============================ */
+
+body.tripora-login {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    background:
+        radial-gradient(circle at 15% 20%, rgba(149, 127, 255, 0.55), transparent 45%),
+        radial-gradient(circle at 85% 85%, rgba(128, 101, 245, 0.45), transparent 40%),
+        linear-gradient(135deg, #304fa5 0%, #4a3fc4 55%, #8065f5 100%);
+}
+
+body.tripora-login main {
+    width: 100%;
+}
+
+body.tripora-login .card {
+    border-radius: 22px;
+    box-shadow: 0 24px 60px rgba(20, 25, 60, 0.35) !important;
+}
+
+/* En el login la tarjeta no se mueve al pasar el ratón */
+body.tripora-login .card:hover {
+    transform: none;
+}
+
+body.tripora-login .card-body {
+    padding: 2.5rem 2rem !important;
+}
+
+body.tripora-login .card-body::before {
+    content: "";
+    display: block;
+    width: 110px;
+    height: 110px;
+    margin: 0 auto 1rem;
+    background: url("../images/icons/TriporaIcon.png") center / contain no-repeat;
+}
+
+body.tripora-login .card-title {
+    font-size: 1.6rem;
+    margin-bottom: 1.75rem !important;
+}
+
+body.tripora-login .form-label {
+    color: #5f687b;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+body.tripora-login .form-control {
+    padding: 12px 14px;
+    background: #f8f9ff;
+}
+
+body.tripora-login .btn-primary {
+    padding: 12px;
+    margin-top: 0.5rem;
+    background: linear-gradient(90deg, #304fa5, #8065f5);
+    border: 0;
+}
+
+body.tripora-login .btn-primary:hover {
+    background: linear-gradient(90deg, #2a4593, #6e55e0);
+}
+
+/* ============================
+   TRIPORA — MÓVIL (pantallas de menos de 576px)
+   Como los teléfonos del mockup: textos más compactos,
+   tarjetas a lo ancho y menú desplegable en tarjeta.
+============================ */
+
+@media (max-width: 575.98px) {
+    body main.container {
+        padding-top: 1.5rem !important;
+        padding-bottom: 1.5rem !important;
+    }
+
+    body h1 {
+        font-size: 1.6rem;
+    }
+
+    body .lead {
+        font-size: 1rem;
+    }
+
+    body .tripora-search {
+        max-width: 100%;
+    }
+
+    body .tripora-search .btn-primary {
+        padding: 0 14px;
+    }
+
+    body .card-img-top {
+        height: 170px !important;
+    }
+
+    /* Menú hamburguesa abierto: panel redondeado bajo la barra */
+    .tripora-navbar .navbar-collapse {
+        margin-top: 10px;
+        padding: 10px !important;
+        background: rgba(255, 255, 255, 0.08);
+        border-radius: 14px;
+    }
+
+    body .table {
+        font-size: 0.85rem;
+    }
+
+    /* Login en móvil: tarjeta casi a pantalla completa */
+    body.tripora-login .card-body {
+        padding: 2rem 1.25rem !important;
+    }
+
+    body.tripora-login .card-body::before {
+        width: 90px;
+        height: 90px;
+    }
+}

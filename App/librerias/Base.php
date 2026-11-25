@@ -80,5 +80,31 @@
             $this->execute();
             return $this->stmt->rowCount();
         }
+
+        // Obtenemos el ultimo indice 
+        public function ultimoIndice(){
+                return $this->dbh->lastInsertId();
+        }
+
+        // Transacciones: varias consultas que se guardan juntas o no se guarda ninguna
+        public function iniciarTransaccion(){
+            return $this->dbh->beginTransaction();
+        }
+
+        public function confirmarTransaccion(){
+            return $this->dbh->commit();
+        }
+
+        public function deshacerTransaccion(){
+            if ($this->dbh->inTransaction()) {
+                $this->dbh->rollBack();
+            }
+        }
+
+        // Accion al error de consulta
+        public function query_error($e)
+        {
+            redireccionar('/inicio/error_sistema');
+        }
     }
     
