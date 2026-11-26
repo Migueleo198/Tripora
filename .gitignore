@@ -1,3 +1,7 @@
 # Credenciales del correo y correos de prueba
 App/config/correo_credenciales.php
 App/logs/
+
+# Docker: contraseñas y volcado con datos personales
+.env
+docker/db/*.sql

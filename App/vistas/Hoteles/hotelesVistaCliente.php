@@ -24,7 +24,7 @@ $hoteles = $datos['hoteles'];
         <div class="row row-cols-1 row-cols-md-3 g-4">
             <?php foreach ($datos['hoteles']->datos as $hotel): ?>
                 <?php $oculto = $datos['idsEncontrados'] !== null && !in_array($hotel->id_hotel, $datos['idsEncontrados']); ?>
-                <?php require RUTA_APP . '/vistas/hoteles/hotelesVistaClienteTarjeta.php'; ?>
+                <?php require RUTA_APP . '/vistas/Hoteles/hotelesVistaClienteTarjeta.php'; ?>
             <?php endforeach; ?>
         </div>
 

@@ -1,0 +1,48 @@
+# Tripora con Docker: docker compose up -d --build  ->  http://localhost:8080
+# Las contraseñas y el correo se leen del archivo .env (copiar .env.example a .env)
+services:
+  db:
+    image: mariadb:10.4
+    restart: unless-stopped
+    environment:
+      MARIADB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      MARIADB_DATABASE: tripora
+      MARIADB_USER: tripora
+      MARIADB_PASSWORD: ${DB_PASSWORD}
+      TZ: Europe/Madrid
+    # lower-case-table-names: en Windows las tablas no distinguen mayúsculas; así en Linux tampoco
+    command: --lower-case-table-names=1 --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    volumes:
+      - datos_bd:/var/lib/mysql
+      # Solo se ejecuta la primera vez (con el volumen vacío): crea las tablas con los datos de XAMPP
+      - ./docker/db:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h localhost -uroot -p$$MARIADB_ROOT_PASSWORD"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  web:
+    build: .
+    restart: unless-stopped
+    ports:
+      - "${PUERTO_WEB:-8080}:80"
+    environment:
+      DB_HOST: db
+      DB_USUARIO: tripora
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_NOMBRE: tripora
+      URL_SITIO: ${URL_SITIO:-http://localhost:8080}
+      CORREO_USUARIO: ${CORREO_USUARIO:-}
+      CORREO_PASSWORD: ${CORREO_PASSWORD:-}
+      TZ: Europe/Madrid
+    volumes:
+      # Las imágenes subidas se guardan fuera del contenedor para no perderlas al reconstruirlo
+      - imagenes:/var/www/html/public/img
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  datos_bd:
+  imagenes:

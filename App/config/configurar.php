@@ -10,10 +10,11 @@
 
 
     // Configuracion de la Base de Datos
-    define('DB_HOST', 'localhost');
-    define('DB_USUARIO', 'root');
-    define('DB_PASSWORD', '');
-    define('DB_NOMBRE', 'tripora');
+    // En Docker llegan por variables de entorno (docker-compose.yml); en XAMPP se usan los valores de siempre
+    define('DB_HOST', getenv('DB_HOST') ?: 'localhost');
+    define('DB_USUARIO', getenv('DB_USUARIO') ?: 'root');
+    define('DB_PASSWORD', getenv('DB_PASSWORD') ?: '');
+    define('DB_NOMBRE', getenv('DB_NOMBRE') ?: 'tripora');
 
     // Configuracion Tamaño de pagina en la paginacion
     define('TAM_PAGINA', 3);
@@ -28,7 +29,7 @@
     define('TMP_SESION', 365 * 24 * 60 * 60);   // un año
 
     // Direccion completa de la web, para los enlaces que van en los correos
-    define('URL_SITIO', 'http://tripora.local');
+    define('URL_SITIO', getenv('URL_SITIO') ?: 'http://tripora.local');
 
     // Correo (SMTP). Con Gmail: CORREO_PASSWORD es una "contraseña de aplicación" de la cuenta
     // Si CORREO_USUARIO esta vacio no se envia nada: el correo se guarda en App/logs/correos.log para pruebas
@@ -39,9 +40,10 @@
         require __DIR__ . '/correo_credenciales.php';
     }
 
+    // Si no hay archivo (por ejemplo en Docker), se cogen de las variables de entorno
     if (!defined('CORREO_USUARIO')) {
-        define('CORREO_USUARIO', '');
-        define('CORREO_PASSWORD', '');
+        define('CORREO_USUARIO', getenv('CORREO_USUARIO') ?: '');
+        define('CORREO_PASSWORD', getenv('CORREO_PASSWORD') ?: '');
     }
     define('CORREO_NOMBRE', 'Tripora');
 

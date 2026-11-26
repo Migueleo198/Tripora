@@ -1,0 +1,8 @@
+# No meter en la imagen: git, secretos, logs ni los datos de la BD (van por el volumen de db)
+.git
+.env
+App/config/correo_credenciales.php
+App/logs
+docker/db
+sql
+crud_mvc.sql

@@ -1,0 +1,36 @@
+# Tripora en un solo contenedor (Apache + PHP 8.0 + MariaDB) para hosting gratuito tipo Render
+# La base de datos se crea al arrancar a partir de un volcado SQL que NO va en git:
+#   - Render: "Secret File" llamado tripora.sql  ->  /etc/secrets/tripora.sql
+#   - Local:  docker run -v ./docker/db/01_tripora.sql:/etc/secrets/tripora.sql ...
+FROM php:8.0-apache
+
+# La imagen de PHP 8.0 usa Debian 11 (bullseye), que ya está en el archivo de Debian
+RUN printf "deb http://archive.debian.org/debian bullseye main\ndeb http://archive.debian.org/debian-security bullseye-security main\n" > /etc/apt/sources.list \
+    && rm -f /etc/apt/sources.list.d/* \
+    && apt-get -o Acquire::Check-Valid-Until=false update \
+    && apt-get install -y --no-install-recommends mariadb-server \
+    && rm -rf /var/lib/apt/lists/* \
+    && docker-php-ext-install pdo_mysql \
+    && a2enmod rewrite headers
+
+# Solo la carpeta public es visible desde el navegador
+ENV APACHE_DOCUMENT_ROOT=/var/www/html/public
+RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf \
+    && sed -ri -e 's!AllowOverride None!AllowOverride All!g' /etc/apache2/apache2.conf
+
+RUN echo "date.timezone=Europe/Madrid" > /usr/local/etc/php/conf.d/zona.ini
+
+# MariaDB pequeña (el plan gratis tiene 512 MB) y sin distinguir mayúsculas en tablas, como en Windows
+RUN printf "[mysqld]\nlower_case_table_names=1\ncharacter-set-server=utf8mb4\ncollation-server=utf8mb4_unicode_ci\nbind-address=127.0.0.1\ninnodb_buffer_pool_size=32M\nperformance_schema=OFF\nmax_connections=30\n" \
+    > /etc/mysql/mariadb.conf.d/99-tripora.cnf
+
+COPY . /var/www/html/
+COPY docker/arrancar.sh /usr/local/bin/arrancar.sh
+
+RUN sed -i 's/\r$//' /usr/local/bin/arrancar.sh && chmod +x /usr/local/bin/arrancar.sh \
+    && mkdir -p /var/www/html/App/logs \
+    && chown -R www-data:www-data /var/www/html/App/logs /var/www/html/public/img
+
+ENV DB_HOST=127.0.0.1 DB_USUARIO=tripora DB_NOMBRE=tripora TZ=Europe/Madrid
+
+CMD ["arrancar.sh"]

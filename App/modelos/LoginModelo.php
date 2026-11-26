@@ -13,7 +13,7 @@ class LoginModelo
     public function obtenerPorEmail($email)
     {
         $this->db->query(
-            "SELECT * FROM Usuario WHERE email = :email LIMIT 1"
+            "SELECT * FROM usuario WHERE email = :email LIMIT 1"
         );
 
         $this->db->bind(':email', $email);
@@ -110,7 +110,7 @@ class LoginModelo
     public function getRolUsuario($email)
     {
         $this->db->query(
-            "SELECT rol FROM Usuario WHERE email = :email LIMIT 1"
+            "SELECT rol FROM usuario WHERE email = :email LIMIT 1"
         );
 
         $this->db->bind(':email', $email);
@@ -124,14 +124,14 @@ class LoginModelo
     public function obtenerUsuarios($pagina = 0, $tam_pagina = 0)
     {
         if ($tam_pagina <= 0) {
-            $this->db->query("SELECT * FROM Usuario");
+            $this->db->query("SELECT * FROM usuario");
             return $this->db->registros();
         }
 
         $registroInicial = $pagina * $tam_pagina;
 
         $this->db->query(
-            "SELECT * FROM Usuario
+            "SELECT * FROM usuario
              LIMIT :inicio, :cantidad"
         );
 
@@ -150,7 +150,7 @@ class LoginModelo
     // Contar usuarios
     public function obtenerNumUsuarios()
     {
-        $this->db->query("SELECT COUNT(*) AS total FROM Usuario");
+        $this->db->query("SELECT COUNT(*) AS total FROM usuario");
 
         $resultado = $this->db->registro();
 
